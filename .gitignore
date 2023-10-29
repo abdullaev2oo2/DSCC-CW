@@ -35,3 +35,13 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+
+# VS folders
+#############
+.vs
+bin
+obj
+packages
+
+

@@ -1,8 +1,8 @@
-﻿using API.Interfaces;
-using Backend.Data;
+﻿using Backend.Data;
+using Backend.Repositories;
 using System.Threading.Tasks;
 
-namespace API.DAL
+namespace Backend.Interfaces
 {
     public class UnitOfWork : IUnitOfWork
     {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace API.Interfaces
+namespace Backend.Interfaces
 {
     public interface IUnitOfWork
     {

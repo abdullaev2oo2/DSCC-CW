@@ -1,6 +1,5 @@
-﻿using API.DAL;
-using API.Interfaces;
-using Backend.Data;
+﻿using Backend.Data;
+using Backend.Interfaces;
 using Backend.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace API.Repositories
+namespace Backend.Repositories
 {
     public class WriterRepository : IWriterRepository
     {

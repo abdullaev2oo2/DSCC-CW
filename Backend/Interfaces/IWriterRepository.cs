@@ -12,6 +12,6 @@ namespace API.Interfaces
         void UpdateWriter(Writer writer);
         void DeleteWriter(int id);
         Writer GetWriterById(int id);
-        Task<IEnumerable<Writer>> GetWriter();
+        Task<IEnumerable<Writer>> GetWriters();
     }
 }

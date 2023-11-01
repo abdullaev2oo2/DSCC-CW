@@ -25,7 +25,7 @@
                 @Html.DisplayNameFor(model => model.Pages)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WriterId)
+                @Html.DisplayNameFor(model => model.Writer.Name)
             </th>
             <th></th>
         </tr>
@@ -46,7 +46,7 @@
                 @Html.DisplayFor(modelItem => item.Pages)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.WriterId)
+                @Html.DisplayFor(modelItem => item.Writer.Name)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

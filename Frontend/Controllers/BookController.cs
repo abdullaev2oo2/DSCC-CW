@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System;
 using Frontend.Models;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Frontend.Controllers
 {
@@ -23,6 +24,26 @@ namespace Frontend.Controllers
         {
             clnt = new HttpClient();
             clnt.BaseAddress = ClientBaseAddress;
+        }
+
+        public async Task<List<Writer>> GetAllWriters()
+        {
+            List<Writer> writers = new List<Writer>();
+
+            HeaderClearing();
+
+            // Sending Request to the find web api Rest service resources using HTTPClient
+            HttpResponseMessage httpResponseMessage = await clnt.GetAsync("api/Writer");
+
+            // If the request is success
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                // storing the web api data into model that was predefined prior
+                var responseMessage = httpResponseMessage.Content.ReadAsStringAsync().Result;
+
+                writers = JsonConvert.DeserializeObject<List<Writer>>(responseMessage);
+            }
+            return writers;
         }
 
         public void HeaderClearing()
@@ -83,8 +104,10 @@ namespace Frontend.Controllers
         }
 
         // GET: Book/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            List<Writer> writerList = await GetAllWriters();
+            ViewBag.WriterList = new SelectList(writerList, "Id", "Name");
             return View();
         }
 

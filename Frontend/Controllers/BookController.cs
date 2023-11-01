@@ -9,21 +9,21 @@ using System;
 using Frontend.Models;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Configuration;
 
 namespace Frontend.Controllers
 {
     public class BookController : Controller
     {
-        // The Definition of Base URL
-        public const string baseUrl = "https://localhost:44346/";
-        Uri ClientBaseAddress = new Uri(baseUrl);
-        HttpClient clnt;
+        private readonly IConfiguration _configuration;
+        private readonly HttpClient clnt;
 
         // Constructor for initiating request to the given base URL publicly
-        public BookController()
+        public BookController(IConfiguration configuration)
         {
+            _configuration = configuration;
             clnt = new HttpClient();
-            clnt.BaseAddress = ClientBaseAddress;
+            clnt.BaseAddress = new Uri(_configuration["BaseUrl"]);
         }
 
         public async Task<List<Writer>> GetAllWriters()
@@ -140,12 +140,15 @@ namespace Frontend.Controllers
         }
 
         // GET: Book/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<ActionResult> Edit(int id)
         {
             //Creating a Get Request to get single Book
             Book bookDetails = new Book();
 
             HeaderClearing();
+
+            List<Writer> writerList = await GetAllWriters();
+            ViewBag.WriterList = new SelectList(writerList, "Id", "Name");
 
             // Creating a get request after preparation of get URL and assignin the results
 

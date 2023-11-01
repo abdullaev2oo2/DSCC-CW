@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Configuration;
 using System.Net.Http.Headers;
 using System.Text;
 
@@ -9,16 +10,15 @@ namespace Frontend.Controllers
 {
     public class WriterController : Controller
     {
-        // The Definition of Base URL
-        public const string baseUrl = "https://localhost:44346/";
-        Uri ClientBaseAddress = new Uri(baseUrl);
-        HttpClient clnt;
+        private readonly IConfiguration _configuration;
+        private readonly HttpClient clnt;
 
         // Constructor for initiating request to the given base URL publicly
-        public WriterController()
+        public WriterController(IConfiguration configuration)
         {
+            _configuration = configuration;
             clnt = new HttpClient();
-            clnt.BaseAddress = ClientBaseAddress;
+            clnt.BaseAddress = new Uri(_configuration["BaseUrl"]);
         }
 
         public void HeaderClearing()

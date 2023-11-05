@@ -1,8 +1,8 @@
-﻿using Backend.Data;
+﻿using Backend.Interfaces;
 using Backend.Repositories;
 using System.Threading.Tasks;
 
-namespace Backend.Interfaces
+namespace Backend.Data
 {
     public class UnitOfWork : IUnitOfWork
     {
